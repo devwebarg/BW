@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gimnasio BW - Necochea | Que nada te detenga a sentirte bien</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Inter & Montserrat -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            red: '#E50914',
+                            redhover: '#B80710',
+                            dark: '#121212',
+                            card: '#1E1E1E',
+                            accent: '#FF3B30'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Montserrat', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .hero-bg {
+            background: linear-gradient(rgba(18, 18, 18, 0.85), rgba(18, 18, 18, 0.95)), url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=1920&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+        }
+        .text-gradient {
+            background: linear-gradient(135deg, #FFF 30%, #E50914 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Fade Animation Effects */
+        .fade-in-on-scroll {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 1.4s cubic-bezier(0.16, 1, 0.3, 1), transform 1.4s cubic-bezier(0.16, 1, 0.3, 1);
+            will-change: opacity, transform;
+        }
+
+        .fade-in-on-scroll.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Section Background Images */
+        .services-bg {
+            background: linear-gradient(rgba(18, 18, 18, 0.92), rgba(18, 18, 18, 0.95)), url('https://images.unsplash.com/photo-1540497077202-7c8a3999166f?q=80&w=1920&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        .quote-bg {
+            background: linear-gradient(rgba(18, 18, 18, 0.7), rgba(229, 9, 20, 0.55)), url('https://images.unsplash.com/photo-1518611012118-696072aa579a?q=80&w=1920&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+        }
+    </style>
+</head>
+<body class="bg-brand-dark text-gray-100 font-sans antialiased selection:bg-brand-red selection:text-white">
+
+    <!-- Header & Navigation -->
+    <header class="fixed top-0 left-0 right-0 z-50 bg-brand-dark/90 backdrop-blur-md border-b border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <!-- Brand Logo -->
+            <a href="#" class="flex items-center gap-3 group">
+                <img src="logo.png" alt="Gimnasio BW Logo" class="h-12 w-auto object-contain transform group-hover:scale-105 transition-transform duration-300">
+                <div class="flex flex-col">
+                    <span class="font-heading font-extrabold text-xl tracking-wider text-white leading-tight">GIMNASIO BW</span>
+                    <span class="text-xs text-gray-400 font-medium tracking-widest uppercase">Necochea</span>
+                </div>
+            </a>
+
+            <!-- Desktop Nav Links -->
+            <nav class="hidden md:flex items-center space-x-8 font-medium">
+                <a href="#inicio" class="hover:text-brand-red transition-colors duration-200">Inicio</a>
+                <a href="#nosotros" class="hover:text-brand-red transition-colors duration-200">Nosotros</a>
+                <a href="#servicios" class="hover:text-brand-red transition-colors duration-200">Servicios</a>
+                <a href="#horarios" class="hover:text-brand-red transition-colors duration-200">Horarios</a>
+                <a href="#contacto" class="hover:text-brand-red transition-colors duration-200">Contacto</a>
+            </nav>
+
+            <!-- Social Links & CTA Button -->
+            <div class="hidden md:flex items-center space-x-4">
+                <a href="https://www.instagram.com/gimnasiobw/" target="_blank" class="w-10 h-10 rounded-lg bg-gray-800 border border-gray-700 hover:border-pink-500 text-gray-300 hover:text-pink-500 flex items-center justify-center transition-all duration-300" aria-label="Instagram">
+                    <i class="fa-brands fa-instagram text-lg"></i>
+                </a>
+                <a href="https://www.facebook.com/waltergimnasio" target="_blank" class="w-10 h-10 rounded-lg bg-gray-800 border border-gray-700 hover:border-blue-500 text-gray-300 hover:text-blue-500 flex items-center justify-center transition-all duration-300" aria-label="Facebook">
+                    <i class="fa-brands fa-facebook-f text-lg"></i>
+                </a>
+                <a href="#contacto" class="bg-brand-red hover:bg-brand-redhover text-white px-5 py-2.5 rounded-lg font-semibold shadow-lg shadow-brand-red/20 hover:shadow-brand-red/40 transition-all duration-300 flex items-center gap-2">
+                    <i class="fa-solid fa-envelope text-lg"></i>
+                    <span>Contactar</span>
+                </a>
+            </div>
+
+            <!-- Mobile Menu Toggle Button -->
+            <button id="mobile-menu-btn" class="md:hidden text-gray-300 hover:text-white text-2xl focus:outline-none" aria-label="Toggle Navigation">
+                <i class="fa-solid fa-bars" id="menu-icon"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Navigation Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-brand-card border-b border-gray-800 px-4 pt-3 pb-6 space-y-4">
+            <a href="#inicio" class="block py-2 text-base font-medium text-gray-200 hover:text-brand-red mobile-link">Inicio</a>
+            <a href="#nosotros" class="block py-2 text-base font-medium text-gray-200 hover:text-brand-red mobile-link">Nosotros</a>
+            <a href="#servicios" class="block py-2 text-base font-medium text-gray-200 hover:text-brand-red mobile-link">Servicios</a>
+            <a href="#horarios" class="block py-2 text-base font-medium text-gray-200 hover:text-brand-red mobile-link">Horarios</a>
+            <a href="#contacto" class="block py-2 text-base font-medium text-gray-200 hover:text-brand-red mobile-link">Contacto</a>
+            
+            <div class="flex items-center justify-around pt-2 border-t border-gray-800">
+                <a href="https://www.instagram.com/gimnasiobw/" target="_blank" class="flex items-center gap-2 text-gray-300 hover:text-pink-500 font-medium py-2">
+                    <i class="fa-brands fa-instagram text-xl"></i>
+                    <span>Instagram</span>
+                </a>
+                <a href="https://www.facebook.com/waltergimnasio" target="_blank" class="flex items-center gap-2 text-gray-300 hover:text-blue-500 font-medium py-2">
+                    <i class="fa-brands fa-facebook-f text-xl"></i>
+                    <span>Facebook</span>
+                </a>
+            </div>
+
+            <a href="#contacto" class="w-full bg-brand-red text-center text-white py-3 rounded-lg font-semibold flex items-center justify-center gap-2 mobile-link">
+                <i class="fa-solid fa-envelope text-xl"></i>
+                <span>Enviar Consulta</span>
+            </a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="inicio" class="relative pt-32 pb-20 md:pt-48 md:pb-32 hero-bg min-h-[90vh] flex items-center">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center md:text-left grid md:grid-cols-12 gap-8 items-center fade-in-on-scroll">
+            <div class="md:col-span-8 space-y-6">
+                <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-brand-red/10 border border-brand-red/30 text-brand-red text-sm font-semibold tracking-wide uppercase">
+                    <i class="fa-solid fa-location-dot"></i> Necochea, Buenos Aires
+                </div>
+                <h1 class="font-heading font-black text-4xl sm:text-6xl lg:text-7xl tracking-tight leading-tight uppercase">
+                    <span class="block">Que nada te detenga</span>
+                    <span class="text-gradient">a sentirte bien</span>
+                </h1>
+                <p class="text-gray-300 text-lg sm:text-xl max-w-2xl font-light">
+                    Transformá tu entrenamiento en una experiencia personalizada. Combinamos equipamiento moderno, entrenamiento guiado y una comunidad apasionada por la salud integral.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 pt-4 justify-center md:justify-start">
+                    <a href="#servicios" class="bg-brand-red hover:bg-brand-redhover text-white px-8 py-4 rounded-xl font-bold text-lg shadow-xl shadow-brand-red/30 hover:shadow-brand-red/50 transition-all duration-300 text-center">
+                        Explorar Servicios
+                    </a>
+                    <a href="#contacto" class="bg-gray-800 hover:bg-gray-700 text-white px-8 py-4 rounded-xl font-bold text-lg border border-gray-700 transition-all duration-300 text-center">
+                        Visítanos en Necochea
+                    </a>
+                </div>
+            </div>
+            <!-- Highlight Badges -->
+            <div class="md:col-span-4 grid grid-cols-2 md:grid-cols-1 gap-4 pt-6 md:pt-0">
+                <div class="bg-brand-card/80 backdrop-blur border border-gray-800 p-5 rounded-2xl flex items-center gap-4 hover:border-brand-red/50 transition-all duration-300">
+                    <div class="w-12 h-12 rounded-xl bg-brand-red/20 text-brand-red flex items-center justify-center text-2xl font-bold">
+                        <i class="fa-solid fa-dumbbell"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-heading font-bold text-lg">Sala de Máquinas</h4>
+                        <p class="text-xs text-gray-400">Equipamiento completo</p>
+                    </div>
+                </div>
+                <div class="bg-brand-card/80 backdrop-blur border border-gray-800 p-5 rounded-2xl flex items-center gap-4 hover:border-brand-red/50 transition-all duration-300">
+                    <div class="w-12 h-12 rounded-xl bg-brand-red/20 text-brand-red flex items-center justify-center text-2xl font-bold">
+                        <i class="fa-solid fa-person-biking"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-heading font-bold text-lg">Spinning</h4>
+                        <p class="text-xs text-gray-400">Clases cardio guiadas</p>
+                    </div>
+                </div>
+                <div class="bg-brand-card/80 backdrop-blur border border-gray-800 p-5 rounded-2xl flex items-center gap-4 col-span-2 md:col-span-1 hover:border-brand-red/50 transition-all duration-300">
+                    <div class="w-12 h-12 rounded-xl bg-brand-red/20 text-brand-red flex items-center justify-center text-2xl font-bold">
+                        <i class="fa-solid fa-user-ninja"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-heading font-bold text-lg">Fitness Coach</h4>
+                        <p class="text-xs text-gray-400">Asesoramiento integral</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="nosotros" class="py-20 bg-brand-dark relative border-t border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-2 gap-12 items-center fade-in-on-scroll">
+                <div class="space-y-6">
+                    <div class="inline-block text-brand-red font-bold text-sm tracking-wider uppercase">
+                        Filosofía y Compromiso
+                    </div>
+                    <h2 class="font-heading font-extrabold text-3xl sm:text-4xl text-white">
+                        Tu centro de bienestar y preparación física en Necochea
+                    </h2>
+                    <p class="text-gray-300 leading-relaxed">
+                        En <strong class="text-white">Gimnasio BW</strong> entendemos el entrenamiento no solo como una meta estética, sino como el motor fundamental para una vida saludable, equilibrada y llena de energía.
+                    </p>
+                    <p class="text-gray-400 leading-relaxed">
+                        Ubicados en el corazón de Necochea, brindamos una atención cercana y profesional. Contamos con tecnología adaptada a todos los niveles de entrenamiento y el acompañamiento constante de nuestro equipo de coaches para garantizar que cada movimiento cuente.
+                    </p>
+                    
+                    <div class="grid sm:grid-cols-2 gap-4 pt-4">
+                        <div class="flex items-start gap-3">
+                            <i class="fa-solid fa-circle-check text-brand-red text-xl mt-1"></i>
+                            <div>
+                                <h4 class="font-bold text-white">Atención Personalizada</h4>
+                                <p class="text-sm text-gray-400">Rutinas adaptadas a tu nivel y metas.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <i class="fa-solid fa-circle-check text-brand-red text-xl mt-1"></i>
+                            <div>
+                                <h4 class="font-bold text-white">Ambiente Motivador</h4>
+                                <p class="text-sm text-gray-400">Compañerismo y buena energía siempre.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Feature Image Grid -->
+                <div class="relative">
+                    <div class="absolute -inset-1 rounded-2xl bg-gradient-to-r from-brand-red to-red-800 blur-lg opacity-30"></div>
+                    <div class="relative bg-brand-card border border-gray-800 rounded-2xl p-4 overflow-hidden shadow-2xl">
+                        <img src="https://images.unsplash.com/photo-1571902943202-507ec2618e8f?q=80&w=800&auto=format&fit=crop" alt="Entrenamiento en Gimnasio BW" class="rounded-xl w-full h-96 object-cover transform hover:scale-105 transition-transform duration-500" onerror="this.src='https://placehold.co/800x600/1e1e1e/fff?text=Gimnasio+BW'">
+                        <div class="absolute bottom-8 left-8 right-8 bg-brand-dark/90 backdrop-blur p-4 rounded-xl border border-gray-700">
+                            <p class="text-brand-red font-bold text-xs uppercase tracking-wider">Ubicación Estratégica</p>
+                            <p class="text-white font-semibold text-sm">C. 60 2822-2900, B7630GUN Necochea</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="servicios" class="py-20 services-bg border-t border-b border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto space-y-4 mb-16 fade-in-on-scroll">
+                <span class="text-brand-red font-bold text-sm tracking-wider uppercase">Lo que ofrecemos</span>
+                <h2 class="font-heading font-extrabold text-3xl sm:text-4xl text-white">Nuestros Servicios Principales</h2>
+                <p class="text-gray-400">Diseñados para potenciar tus capacidades físicas, quemar calorías y alcanzar tu máximo rendimiento.</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 fade-in-on-scroll">
+                <!-- Card 1: Musculación -->
+                <div class="bg-brand-card/90 backdrop-blur border border-gray-800 hover:border-brand-red/50 rounded-2xl p-6 transition-all duration-300 hover:-translate-y-2 group flex flex-col justify-between shadow-xl">
+                    <div>
+                        <div class="w-14 h-14 bg-brand-red/10 group-hover:bg-brand-red text-brand-red group-hover:text-white rounded-xl flex items-center justify-center text-2xl transition-colors duration-300 mb-6">
+                            <i class="fa-solid fa-dumbbell"></i>
+                        </div>
+                        <h3 class="font-heading font-bold text-xl text-white mb-3">Sala de Máquinas</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed mb-4">
+                            Extensa variedad de máquinas biomecánicas, pesos libres y mancuernas ideales para hipertrofia, fuerza y acondicionamiento general.
+                        </p>
+                    </div>
+                    <ul class="text-xs text-gray-400 space-y-2 border-t border-gray-800 pt-4">
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-red"></i> Máquinas de última generación</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-red"></i> Zona de pesos libres completa</li>
+                    </ul>
+                </div>
+
+                <!-- Card 2: Spinning -->
+                <div class="bg-brand-card/90 backdrop-blur border border-gray-800 hover:border-brand-red/50 rounded-2xl p-6 transition-all duration-300 hover:-translate-y-2 group flex flex-col justify-between shadow-xl">
+                    <div>
+                        <div class="w-14 h-14 bg-brand-red/10 group-hover:bg-brand-red text-brand-red group-hover:text-white rounded-xl flex items-center justify-center text-2xl transition-colors duration-300 mb-6">
+                            <i class="fa-solid fa-person-biking"></i>
+                        </div>
+                        <h3 class="font-heading font-bold text-xl text-white mb-3">Clases de Spinning</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed mb-4">
+                            Sesiones grupales de ciclismo indoor de alta intensidad impulsadas por música motivadora para quemar grasa y mejorar la resistencia.
+                        </p>
+                    </div>
+                    <ul class="text-xs text-gray-400 space-y-2 border-t border-gray-800 pt-4">
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-red"></i> Trabajo cardiovascular intensivo</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-red"></i> Ambiente lleno de energía</li>
+                    </ul>
+                </div>
+
+                <!-- Card 3: Personalizado -->
+                <div class="bg-brand-card/90 backdrop-blur border border-gray-800 hover:border-brand-red/50 rounded-2xl p-6 transition-all duration-300 hover:-translate-y-2 group flex flex-col justify-between shadow-xl">
+                    <div>
+                        <div class="w-14 h-14 bg-brand-red/10 group-hover:bg-brand-red text-brand-red group-hover:text-white rounded-xl flex items-center justify-center text-2xl transition-colors duration-300 mb-6">
+                            <i class="fa-solid fa-user-ninja"></i>
+                        </div>
+                        <h3 class="font-heading font-bold text-xl text-white mb-3">Coach de Fitness</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed mb-4">
+                            Guía experta dentro de la sala para supervisar la ejecución adecuada de cada ejercicio, prevenir lesiones y maximizar tus resultados.
+                        </p>
+                    </div>
+                    <ul class="text-xs text-gray-400 space-y-2 border-t border-gray-800 pt-4">
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-red"></i> Corrección de postura y técnica</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-red"></i> Planificación de rutinas</li>
+                    </ul>
+                </div>
+
+                <!-- Card 4: Preparación Física -->
+                <div class="bg-brand-card/90 backdrop-blur border border-gray-800 hover:border-brand-red/50 rounded-2xl p-6 transition-all duration-300 hover:-translate-y-2 group flex flex-col justify-between shadow-xl">
+                    <div>
+                        <div class="w-14 h-14 bg-brand-red/10 group-hover:bg-brand-red text-brand-red group-hover:text-white rounded-xl flex items-center justify-center text-2xl transition-colors duration-300 mb-6">
+                            <i class="fa-solid fa-heart-pulse"></i>
+                        </div>
+                        <h3 class="font-heading font-bold text-xl text-white mb-3">Bienestar Integral</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed mb-4">
+                            Programas orientados a mejorar tu agilidad, salud articular y capacidad física cotidiana bajo nuestro lema de superación personal.
+                        </p>
+                    </div>
+                    <ul class="text-xs text-gray-400 space-y-2 border-t border-gray-800 pt-4">
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-red"></i> Aumento de vitalidad diaria</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-red"></i> Adaptable a todas las edades</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Schedule Section -->
+    <section id="horarios" class="py-20 bg-brand-dark/50 border-t border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto space-y-4 mb-12 fade-in-on-scroll">
+                <span class="text-brand-red font-bold text-sm tracking-wider uppercase">Planifica tu semana</span>
+                <h2 class="font-heading font-extrabold text-3xl sm:text-4xl text-white">Horarios de Clases y Sala</h2>
+                <p class="text-gray-400">Sumate a nuestras sesiones guiadas de Spinning y Musculación en el horario que mejor se adapte a tu rutina.</p>
+            </div>
+
+            <!-- Schedule Card Table -->
+            <div class="bg-brand-card border border-gray-800 rounded-2xl overflow-hidden shadow-2xl fade-in-on-scroll">
+                <div class="p-6 bg-gray-900/50 border-b border-gray-800 flex flex-wrap justify-between items-center gap-4">
+                    <div class="flex items-center gap-3">
+                        <i class="fa-solid fa-clock text-brand-red text-xl"></i>
+                        <span class="font-bold text-white text-lg">Horario de Apertura General</span>
+                    </div>
+                    <span class="text-sm text-gray-300 bg-brand-red/20 text-brand-red font-semibold px-4 py-1.5 rounded-full border border-brand-red/30">
+                        Lunes a Viernes: 07:00 hs - 22:00 hs | Sábados: 09:00 hs - 13:00 hs
+                    </span>
+                </div>
+
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left text-sm text-gray-300">
+                        <thead class="bg-gray-900 text-gray-400 font-heading uppercase text-xs tracking-wider">
+                            <tr>
+                                <th class="py-4 px-6">Horario</th>
+                                <th class="py-4 px-6">Lunes a Viernes</th>
+                                <th class="py-4 px-6">Sábados</th>
+                                <th class="py-4 px-6">Detalle / Actividad</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-800">
+                            <tr class="hover:bg-gray-800/40 transition-colors">
+                                <td class="py-4 px-6 font-bold text-white">08:00 - 12:00</td>
+                                <td class="py-4 px-6"><span class="bg-green-500/10 text-green-400 px-3 py-1 rounded-full text-xs font-semibold">Sala Abierta</span> Musculación</td>
+                                <td class="py-4 px-6"><span class="bg-green-500/10 text-green-400 px-3 py-1 rounded-full text-xs font-semibold">Sala Abierta</span></td>
+                                <td class="py-4 px-6 text-gray-400">Asesoramiento libre de Coach</td>
+                            </tr>
+                            <tr class="hover:bg-gray-800/40 transition-colors">
+                                <td class="py-4 px-6 font-bold text-white">14:00 - 15:00</td>
+                                <td class="py-4 px-6"><span class="bg-brand-red/10 text-brand-red px-3 py-1 rounded-full text-xs font-semibold">Spinning Turno Tarde</span></td>
+                                <td class="py-4 px-6 text-gray-500">-</td>
+                                <td class="py-4 px-6 text-gray-400">Reserva de bici con anticipación</td>
+                            </tr>
+                            <tr class="hover:bg-gray-800/40 transition-colors">
+                                <td class="py-4 px-6 font-bold text-white">16:00 - 21:00</td>
+                                <td class="py-4 px-6"><span class="bg-green-500/10 text-green-400 px-3 py-1 rounded-full text-xs font-semibold">Sala Abierta</span> Musculación</td>
+                                <td class="py-4 px-6 text-gray-500">Cerrado tarde</td>
+                                <td class="py-4 px-6 text-gray-400">Horario pico de fuerza y resistencia</td>
+                            </tr>
+                            <tr class="hover:bg-gray-800/40 transition-colors">
+                                <td class="py-4 px-6 font-bold text-white">19:30 - 20:30</td>
+                                <td class="py-4 px-6"><span class="bg-brand-red/10 text-brand-red px-3 py-1 rounded-full text-xs font-semibold">Spinning Turno Noche</span></td>
+                                <td class="py-4 px-6 text-gray-500">-</td>
+                                <td class="py-4 px-6 text-gray-400">Clase grupal cardio de alta energía</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials / Quote Banner -->
+    <section class="py-24 quote-bg text-white relative overflow-hidden border-t border-b border-brand-red/40 shadow-2xl">
+        <div class="max-w-5xl mx-auto px-4 text-center space-y-6 fade-in-on-scroll relative z-10">
+            <i class="fa-solid fa-quote-left text-4xl opacity-50"></i>
+            <h3 class="font-heading font-black text-2xl sm:text-4xl leading-snug uppercase tracking-tight drop-shadow-md">
+                “Que nada te detenga a sentirte bien”
+            </h3>
+            <p class="text-red-100 max-w-2xl mx-auto text-base sm:text-lg drop-shadow">
+                Vení a conocer la comunidad de Gimnasio BW en Necochea. Sumate a un espacio diseñado para ayudarte a alcanzar tus metas día a día.
+            </p>
+            <div class="flex flex-wrap justify-center gap-4 pt-2">
+                <a href="https://www.instagram.com/gimnasiobw/" target="_blank" class="inline-flex items-center gap-2 bg-white text-brand-red hover:bg-gray-100 font-bold px-6 py-3 rounded-full transition-all duration-300 shadow-xl">
+                    <i class="fa-brands fa-instagram text-lg"></i>
+                    <span>Seguinos en Instagram</span>
+                </a>
+                <a href="https://www.facebook.com/waltergimnasio" target="_blank" class="inline-flex items-center gap-2 bg-brand-dark/60 backdrop-blur border border-white/30 text-white hover:bg-white/20 font-bold px-6 py-3 rounded-full transition-all duration-300">
+                    <i class="fa-brands fa-facebook-f text-lg"></i>
+                    <span>Seguinos en Facebook</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact & Map Section -->
+    <section id="contacto" class="py-20 bg-brand-dark">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-12 gap-12 fade-in-on-scroll">
+                <!-- Info Column -->
+                <div class="lg:col-span-5 space-y-8">
+                    <div>
+                        <span class="text-brand-red font-bold text-sm tracking-wider uppercase">Contacto & Ubicación</span>
+                        <h2 class="font-heading font-extrabold text-3xl sm:text-4xl text-white mt-2">¿Cómo encontrarnos?</h2>
+                        <p class="text-gray-400 mt-4 leading-relaxed">
+                            Estamos ubicados en Necochea, listos para asesorarte y brindarte la mejor atención. Podés acercarte personalmente o mandarnos un mensaje a través del formulario.
+                        </p>
+                    </div>
+
+                    <div class="space-y-6">
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 rounded-xl bg-brand-card border border-gray-800 text-brand-red flex items-center justify-center text-xl shrink-0">
+                                <i class="fa-solid fa-location-dot"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-white">Dirección</h4>
+                                <p class="text-gray-400 text-sm">C. 60 2822-2900, B7630GUN Necochea</p>
+                                <p class="text-gray-500 text-xs mt-0.5">Provincia de Buenos Aires, Argentina</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 rounded-xl bg-brand-card border border-gray-800 text-pink-500 flex items-center justify-center text-xl shrink-0">
+                                <i class="fa-brands fa-instagram"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-white">Instagram Oficial</h4>
+                                <a href="https://www.instagram.com/gimnasiobw/" target="_blank" class="text-brand-red hover:underline text-sm font-medium">
+                                    instagram.com/gimnasiobw
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 rounded-xl bg-brand-card border border-gray-800 text-blue-500 flex items-center justify-center text-xl shrink-0">
+                                <i class="fa-brands fa-facebook"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-white">Facebook Oficial</h4>
+                                <a href="https://www.facebook.com/waltergimnasio" target="_blank" class="text-brand-red hover:underline text-sm font-medium">
+                                    facebook.com/waltergimnasio
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 rounded-xl bg-brand-card border border-gray-800 text-brand-red flex items-center justify-center text-xl shrink-0">
+                                <i class="fa-solid fa-envelope"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-white">Consultas Directas</h4>
+                                <p class="text-gray-400 text-sm">Dejanos tu consulta mediante el formulario y te responderemos a la brevedad.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Form Column -->
+                <div class="lg:col-span-7 bg-brand-card border border-gray-800 p-8 rounded-2xl shadow-xl">
+                    <h3 class="font-heading font-bold text-2xl text-white mb-6">Envianos tu consulta</h3>
+                    <form id="contact-form" class="space-y-6">
+                        <div class="grid sm:grid-cols-2 gap-6">
+                            <div>
+                                <label for="name" class="block text-sm font-medium text-gray-300 mb-2">Nombre Completo</label>
+                                <input type="text" id="name" required placeholder="Tu nombre" class="w-full bg-brand-dark border border-gray-700 focus:border-brand-red rounded-lg px-4 py-3 text-white placeholder-gray-500 focus:outline-none transition-colors">
+                            </div>
+                            <div>
+                                <label for="email" class="block text-sm font-medium text-gray-300 mb-2">Correo Electrónico</label>
+                                <input type="email" id="email" required placeholder="tu@email.com" class="w-full bg-brand-dark border border-gray-700 focus:border-brand-red rounded-lg px-4 py-3 text-white placeholder-gray-500 focus:outline-none transition-colors">
+                            </div>
+                        </div>
+                        <div>
+                            <label for="interest" class="block text-sm font-medium text-gray-300 mb-2">Interés Principal</label>
+                            <select id="interest" class="w-full bg-brand-dark border border-gray-700 focus:border-brand-red rounded-lg px-4 py-3 text-white focus:outline-none transition-colors">
+                                <option value="Musculación / Sala de Máquinas">Musculación / Sala de Máquinas</option>
+                                <option value="Clases de Spinning">Clases de Spinning</option>
+                                <option value="Entrenamiento Personalizado">Entrenamiento Personalizado</option>
+                                <option value="Consultas Generales">Consultas Generales</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="message" class="block text-sm font-medium text-gray-300 mb-2">Mensaje</label>
+                            <textarea id="message" rows="4" required placeholder="Contanos tu objetivo o consulta..." class="w-full bg-brand-dark border border-gray-700 focus:border-brand-red rounded-lg px-4 py-3 text-white placeholder-gray-500 focus:outline-none transition-colors"></textarea>
+                        </div>
+                        <button type="submit" class="w-full bg-brand-red hover:bg-brand-redhover text-white font-bold py-4 rounded-lg shadow-lg shadow-brand-red/30 transition-all duration-300 text-center">
+                            Enviar Consulta
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black border-t border-gray-800 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row justify-between items-center gap-6">
+            <div class="flex items-center gap-3">
+                <img src="logo.png" alt="Gimnasio BW Logo" class="h-10 w-auto object-contain">
+                <div>
+                    <span class="font-heading font-extrabold text-lg text-white">GIMNASIO BW</span>
+                    <p class="text-xs text-gray-500">Necochea, Provincia de Buenos Aires</p>
+                </div>
+            </div>
+
+            <p class="text-sm text-gray-500 text-center">
+                &copy; <span id="year"></span> Gimnasio BW. Todos los derechos reservados.
+            </p>
+
+            <div class="flex space-x-4 text-xl">
+                <a href="https://www.instagram.com/gimnasiobw/" target="_blank" class="w-10 h-10 rounded-full bg-gray-900 border border-gray-800 hover:border-pink-500 text-gray-400 hover:text-pink-500 flex items-center justify-center transition-all">
+                    <i class="fa-brands fa-instagram"></i>
+                </a>
+                <a href="https://www.facebook.com/waltergimnasio" target="_blank" class="w-10 h-10 rounded-full bg-gray-900 border border-gray-800 hover:border-blue-500 text-gray-400 hover:text-blue-500 flex items-center justify-center transition-all">
+                    <i class="fa-brands fa-facebook-f"></i>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Interactive Script -->
+    <script>
+        // Dynamic year setup
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        // Mobile Menu Toggle
+        const menuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const menuIcon = document.getElementById('menu-icon');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+
+        menuBtn.addEventListener('click', () => {
+            const isHidden = mobileMenu.classList.contains('hidden');
+            if (isHidden) {
+                mobileMenu.classList.remove('hidden');
+                menuIcon.classList.remove('fa-bars');
+                menuIcon.classList.add('fa-xmark');
+            } else {
+                mobileMenu.classList.add('hidden');
+                menuIcon.classList.remove('fa-xmark');
+                menuIcon.classList.add('fa-bars');
+            }
+        });
+
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+                menuIcon.classList.remove('fa-xmark');
+                menuIcon.classList.add('fa-bars');
+            });
+        });
+
+        // Contact Form Handler
+        document.getElementById('contact-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('¡Gracias por tu mensaje! Tu consulta ha sido enviada correctamente.');
+            this.reset();
+        });
+
+        // Scroll Intersection Observer for Fade Effects
+        const observerOptions = {
+            threshold: 0.15
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                } else {
+                    entry.target.classList.remove('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in-on-scroll').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
